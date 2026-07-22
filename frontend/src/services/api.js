@@ -1,7 +1,15 @@
 import axios from "axios";
 
-const api = axios.create({
+const API = axios.create({
   baseURL: "http://127.0.0.1:8000",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-export default api;
+export const predictDelay = async (data) => {
+  const response = await API.post("/predict", data);
+  return response.data;
+};
+
+export default API;
