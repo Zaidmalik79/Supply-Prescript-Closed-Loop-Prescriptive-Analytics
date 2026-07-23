@@ -1,18 +1,9 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from prediction import predict
+from optimizer import optimize_decision
 
 app = FastAPI(title="SupplyPrescript API")
-
-# Enable CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 class PredictionRequest(BaseModel):
@@ -55,6 +46,10 @@ def predict_delay(request: PredictionRequest):
 
     result = predict(data)
 
+    recommendation = optimize_decision(result)
+
     return {
-        "Late_delivery_risk": int(result)
+        "Late_delivery_risk": int(result),
+        "Recommendation": recommendation["decision"],
+        "Estimated_Cost": recommendation["cost"]
     }
