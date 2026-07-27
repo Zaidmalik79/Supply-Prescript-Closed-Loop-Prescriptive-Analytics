@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from prediction import predict
 from optimizer import optimize_decision
+from analytics import get_dashboard_data
 
 app = FastAPI(title="SupplyPrescript API")
 
@@ -67,3 +68,6 @@ def predict_delay(request: PredictionRequest):
         "Recommendation": recommendation["decision"],
         "Estimated_Cost": recommendation["cost"]
     }
+@app.get("/dashboard")
+def dashboard():
+    return get_dashboard_data()    
