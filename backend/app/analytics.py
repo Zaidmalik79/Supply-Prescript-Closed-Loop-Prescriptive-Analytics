@@ -1,21 +1,31 @@
-import os
 import pandas as pd
+from snowflake_db import conn
 
-# Project root
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+query = """
+SELECT *
+FROM SUPPLY_CHAIN
+"""
 
-# Dataset path
-DATA_PATH = os.path.join(ROOT_DIR, "dataset", "cleaned_supply_chain..csv")
+df = pd.read_sql(query, conn)
 
-# Load dataset
-df = pd.read_csv(DATA_PATH)
+print(df.columns.tolist())   # Temporary: check columns
 
 
 def get_dashboard_data():
-
     return {
         "total_orders": len(df),
-        "total_sales": round(df["Sales"].sum(), 2),
-        "late_deliveries": int(df["Late_delivery_risk"].sum()),
-        "average_shipping_efficiency": round(df["Shipping_Efficiency"].mean(), 2),
+        "total_sales": round(df["SALES"].sum(), 2),
+        "late_deliveries": int(df["LATE_DELIVERY_RISK"].sum()),
+        "avg_shipping_days": round(df["DAYS_FOR_SHIPPING_REAL"].mean(), 2),
+        "avg_scheduled_days": round(df["DAYS_FOR_SHIPMENT_SCHEDULED"].mean(), 2),
     }
+    print(df.columns.tolist())
+
+print(df.head())
+
+print(df[[
+    "SALES",
+    "LATE_DELIVERY_RISK",
+    "DAYS_FOR_SHIPPING_REAL",
+    "DAYS_FOR_SHIPMENT_SCHEDULED"
+]].head())
