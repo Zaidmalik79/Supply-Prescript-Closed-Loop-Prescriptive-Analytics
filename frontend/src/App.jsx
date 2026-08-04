@@ -1,6 +1,7 @@
-import Navbar from "./assets/Navbar";
-import Sidebar from "./assets/Sidebar";
-import Dashboard from "./components/Dashboard";
+import Navbar from "./layout/Navbar";
+import Sidebar from "./layout/Sidebar";
+import Dashboard from "./dashboard/Dashboard";
+
 import "./App.css";
 
 function App() {
