@@ -1,95 +1,68 @@
-import Prediction from "./Prediction";
-import Charts from "./Charts";
-import Shipments from "./Shipments";
-import Recommendations from "./Recommendations";
+import { useEffect, useState } from "react";
+import { getDashboardData } from "../services/api";
 
 function Dashboard() {
+  const [dashboard, setDashboard] = useState(null);
+
+  useEffect(() => {
+    loadDashboard();
+  }, []);
+
+  const loadDashboard = async () => {
+    try {
+      const data = await getDashboardData();
+      setDashboard(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (!dashboard) {
+    return <h2>Loading Dashboard...</h2>;
+  }
+
   return (
-    <div
-      style={{
-        flex: 1,
-        padding: "25px",
-        background: "#f4f6f9",
-        minHeight: "100vh",
-      }}
-    >
-      <h1>📊 SupplyPrescript Dashboard</h1>
+    <div style={{ padding: "20px" }}>
+      <h1>SupplyPrescript Dashboard</h1>
 
-      {/* KPI Cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4,1fr)",
-          gap: "20px",
-          marginTop: "25px",
-        }}
-      >
-        <div
-          style={{
-            background: "#fff",
-            padding: "20px",
-            borderRadius: "10px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3>Total Shipments</h3>
-          <h2>50,000</h2>
+      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+
+        <div style={cardStyle}>
+          <h3>Total Orders</h3>
+          <h2>{dashboard.total_orders}</h2>
         </div>
 
-        <div
-          style={{
-            background: "#fff",
-            padding: "20px",
-            borderRadius: "10px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
+        <div style={cardStyle}>
+          <h3>Total Sales</h3>
+          <h2>${dashboard.total_sales.toLocaleString()}</h2>
+        </div>
+
+        <div style={cardStyle}>
           <h3>Late Deliveries</h3>
-          <h2>8,420</h2>
+          <h2>{dashboard.late_deliveries}</h2>
         </div>
 
-        <div
-          style={{
-            background: "#fff",
-            padding: "20px",
-            borderRadius: "10px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3>On-Time Delivery</h3>
-          <h2>41,580</h2>
+        <div style={cardStyle}>
+          <h3>Avg Shipping Days</h3>
+          <h2>{dashboard.avg_shipping_days}</h2>
         </div>
 
-        <div
-          style={{
-            background: "#fff",
-            padding: "20px",
-            borderRadius: "10px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
-          <h3>Accuracy</h3>
-          <h2>96%</h2>
+        <div style={cardStyle}>
+          <h3>Scheduled Days</h3>
+          <h2>{dashboard.avg_scheduled_days}</h2>
         </div>
-      </div>
 
-      {/* Prediction */}
-      <div
-        style={{
-          marginTop: "40px",
-          background: "#fff",
-          padding: "25px",
-          borderRadius: "10px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        }}
-      > 
-        <Prediction />
-        <Charts />
-        <Shipments />
-        <Recommendations />
       </div>
     </div>
   );
 }
+
+const cardStyle = {
+  width: "220px",
+  padding: "20px",
+  borderRadius: "10px",
+  boxShadow: "0 0 8px rgba(0,0,0,.2)",
+  textAlign: "center",
+};
 
 export default Dashboard;
