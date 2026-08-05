@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
-import "../styles/dashboard.css";
+
 import { getDashboardData } from "../services/api";
+
+import StatCard from "./StatCard";
+import SalesChart from "./SalesChart";
+import ShipmentChart from "./ShipmentChart";
+import RegionChart from "./RegionChart";
+
+import "../styles/dashboard.css";
 
 function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
@@ -10,60 +17,79 @@ function Dashboard() {
   }, []);
 
   const loadDashboard = async () => {
-    try {
-      const data = await getDashboardData();
-      setDashboard(data);
-    } catch (error) {
-      console.error(error);
-    }
+    const data = await getDashboardData();
+    setDashboard(data);
   };
 
-  if (!dashboard) {
-    return <h2>Loading Dashboard...</h2>;
-  }
+  if (!dashboard) return <h2>Loading...</h2>;
+
+  // Temporary demo data (will be replaced by backend APIs)
+  const salesData = [
+    { month: "Jan", sales: 12000 },
+    { month: "Feb", sales: 18000 },
+    { month: "Mar", sales: 15000 },
+    { month: "Apr", sales: 22000 },
+    { month: "May", sales: 27000 },
+  ];
+
+  const shipmentData = [
+    { status: "On Time", value: 60 },
+    { status: "Late", value: 30 },
+    { status: "Delayed", value: 10 },
+  ];
+
+  const regionData = [
+    { region: "Asia", orders: 320 },
+    { region: "Europe", orders: 220 },
+    { region: "USA", orders: 180 },
+    { region: "Africa", orders: 80 },
+  ];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>SupplyPrescript Dashboard</h1>
+    <div className="dashboard">
 
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+      <h1>SupplyPrescript Analytics</h1>
 
-        <div style={cardStyle}>
-          <h3>Total Orders</h3>
-          <h2>{dashboard.total_orders}</h2>
-        </div>
+      <div className="cards">
 
-        <div style={cardStyle}>
-          <h3>Total Sales</h3>
-          <h2>${dashboard.total_sales.toLocaleString()}</h2>
-        </div>
+        <StatCard
+          title="Orders"
+          value={dashboard.total_orders}
+          color="#2563eb"
+        />
 
-        <div style={cardStyle}>
-          <h3>Late Deliveries</h3>
-          <h2>{dashboard.late_deliveries}</h2>
-        </div>
+        <StatCard
+          title="Sales"
+          value={dashboard.total_sales}
+          color="#10b981"
+        />
 
-        <div style={cardStyle}>
-          <h3>Avg Shipping Days</h3>
-          <h2>{dashboard.avg_shipping_days}</h2>
-        </div>
+        <StatCard
+          title="Late Deliveries"
+          value={dashboard.late_deliveries}
+          color="#ef4444"
+        />
 
-        <div style={cardStyle}>
-          <h3>Scheduled Days</h3>
-          <h2>{dashboard.avg_scheduled_days}</h2>
-        </div>
+        <StatCard
+          title="Avg Shipping"
+          value={dashboard.avg_shipping_days}
+          color="#f59e0b"
+        />
 
       </div>
+
+      <div className="charts">
+
+        <SalesChart data={salesData} />
+
+        <ShipmentChart data={shipmentData} />
+
+      </div>
+
+      <RegionChart data={regionData} />
+
     </div>
   );
 }
-
-const cardStyle = {
-  width: "220px",
-  padding: "20px",
-  borderRadius: "10px",
-  boxShadow: "0 0 8px rgba(0,0,0,.2)",
-  textAlign: "center",
-};
 
 export default Dashboard;

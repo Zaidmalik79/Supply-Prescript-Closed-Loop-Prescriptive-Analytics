@@ -1,81 +1,77 @@
 .navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
 
-    height:70px;
+height:70px;
 
-    background:#111827;
+background:#2563eb;
 
-    display:flex;
+display:flex;
 
-    justify-content:space-between;
+justify-content:space-between;
 
-    align-items:center;
+align-items:center;
 
-    padding:0 30px;
+padding:0 30px;
 
-    color:white;
+color:white;
 
-    z-index:1000;
-
-    box-shadow:0 2px 8px rgba(0,0,0,.4);
 }
 
 .logo{
-    font-size:24px;
-    font-weight:bold;
+
+font-size:24px;
+
+font-weight:bold;
+
 }
 
 .search-box{
-    display:flex;
 
-    align-items:center;
+background:white;
 
-    background:#1F2937;
+padding:10px;
 
-    padding:10px 18px;
+border-radius:10px;
 
-    border-radius:10px;
+display:flex;
 
-    width:350px;
+align-items:center;
 
-    gap:10px;
+gap:10px;
+
+width:350px;
+
 }
 
 .search-box input{
 
-    background:none;
+border:none;
 
-    border:none;
+outline:none;
 
-    outline:none;
+width:100%;
 
-    color:white;
-
-    width:100%;
 }
 
 .navbar-right{
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+gap:20px;
 
-    gap:25px;
+font-size:24px;
+
+align-items:center;
+
 }
 
 .icon{
 
-    font-size:22px;
+cursor:pointer;
 
-    cursor:pointer;
 }
 
 .user{
 
-    font-size:36px;
+font-size:34px;
 
-    cursor:pointer;
 }

@@ -6,13 +6,21 @@ import "./App.css";
 
 function App() {
   return (
-    <>
+    <div className="app">
+
       <Navbar />
-      <div style={{ display: "flex" }}>
+
+      <div className="main-container">
+
         <Sidebar />
-        <Dashboard />
+
+        <div className="content">
+          <Dashboard />
+        </div>
+
       </div>
-    </>
+
+    </div>
   );
 }
 
