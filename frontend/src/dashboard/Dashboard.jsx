@@ -11,19 +11,31 @@ import "../styles/dashboard.css";
 
 function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadDashboard();
   }, []);
 
   const loadDashboard = async () => {
-    const data = await getDashboardData();
-    setDashboard(data);
+    try {
+      const data = await getDashboardData();
+      console.log("Dashboard API:", data);
+      setDashboard(data);
+    } catch (err) {
+      console.error("Dashboard API Error:", err);
+      setError("Unable to load dashboard data.");
+    }
   };
 
-  if (!dashboard) return <h2>Loading...</h2>;
+  if (error) {
+    return <h2>{error}</h2>;
+  }
 
-  // Temporary demo data (will be replaced by backend APIs)
+  if (!dashboard) {
+    return <h2>Loading dashboard...</h2>;
+  }
+
   const salesData = [
     { month: "Jan", sales: 12000 },
     { month: "Feb", sales: 18000 },
@@ -79,11 +91,8 @@ function Dashboard() {
       </div>
 
       <div className="charts">
-
         <SalesChart data={salesData} />
-
         <ShipmentChart data={shipmentData} />
-
       </div>
 
       <RegionChart data={regionData} />

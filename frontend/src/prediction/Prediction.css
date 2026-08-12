@@ -1,0 +1,507 @@
+/* =====================================================
+   SUPPLYPRESCRIPT - PROFESSIONAL PREDICTION UI
+   ===================================================== */
+
+.prediction-page {
+  width: 100%;
+  min-height: calc(100vh - 72px);
+  padding: 34px 42px 50px;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.prediction-header {
+  max-width: 1280px;
+  margin: 0 auto 28px;
+}
+
+.prediction-header h1 {
+  margin: 0;
+  text-align: center;
+
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 750;
+  letter-spacing: -1px;
+
+  color: #111827;
+}
+
+.prediction-header p {
+  margin: 10px auto 0;
+  max-width: 720px;
+
+  text-align: center;
+
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   MAIN LAYOUT
+   ===================================================== */
+
+.prediction-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(340px, 0.75fr);
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+/* =====================================================
+   FORM CARD
+   ===================================================== */
+
+.prediction-form {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px 24px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf1;
+  border-radius: 16px;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 15px 35px rgba(15, 23, 42, 0.05);
+}
+
+/* small heading before form */
+
+.prediction-form::before {
+  content: "Shipment Information";
+
+  grid-column: 1 / -1;
+
+  display: block;
+
+  padding-bottom: 4px;
+
+  color: #172033;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+/* =====================================================
+   FORM GROUP
+   ===================================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-group label {
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d9e0e9;
+  border-radius: 8px;
+
+  background: #fbfcfe;
+
+  color: #1e293b;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #b8c4d4;
+  background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* =====================================================
+   PREDICT BUTTON
+   ===================================================== */
+
+.predict-button {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  height: 50px;
+
+  margin-top: 4px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 14px rgba(37, 99, 235, 0.20);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.predict-button:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 9px 18px rgba(37, 99, 235, 0.25);
+}
+
+.predict-button:active {
+  transform: translateY(0);
+}
+
+.predict-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   RESULT PANEL
+   ===================================================== */
+
+.prediction-result {
+  background: #ffffff;
+
+  border: 1px solid #e5eaf1;
+  border-radius: 16px;
+
+  padding: 26px;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 15px 35px rgba(15, 23, 42, 0.05);
+}
+
+.result-box h2 {
+  margin: 0 0 20px;
+
+  color: #172033;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   RESULT CARDS
+   ===================================================== */
+
+.result-card {
+  position: relative;
+
+  margin-bottom: 13px;
+
+  padding: 20px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.result-card:last-child {
+  margin-bottom: 0;
+}
+
+.result-card span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.result-card strong {
+  display: block;
+
+  color: #172033;
+
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+
+/* =====================================================
+   HIGH RISK
+   ===================================================== */
+
+.result-card:first-of-type {
+  background: #fff7f7;
+  border-color: #fecaca;
+}
+
+.result-card:first-of-type strong {
+  color: #dc2626;
+
+  font-size: 21px;
+}
+
+/* =====================================================
+   COST
+   ===================================================== */
+
+.result-card:last-of-type strong {
+  color: #172033;
+  font-size: 21px;
+}
+
+/* =====================================================
+   MODEL PREDICTION
+   ===================================================== */
+
+.result-card small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+/* =====================================================
+   PLACEHOLDER
+   ===================================================== */
+
+.result-placeholder {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.robot {
+  width: 64px;
+  height: 64px;
+
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eff6ff;
+
+  border-radius: 16px;
+
+  font-size: 30px;
+}
+
+.result-placeholder h2 {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+}
+
+.result-placeholder p {
+  max-width: 300px;
+
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.error-box {
+  padding: 20px;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+}
+
+.error-box h2 {
+  margin: 0 0 8px;
+
+  color: #b91c1c;
+
+  font-size: 17px;
+}
+
+.error-box p {
+  margin: 0;
+
+  color: #7f1d1d;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   API RESPONSE
+   ===================================================== */
+
+.api-response {
+  margin-top: 18px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #e5eaf1;
+}
+
+.api-response summary {
+  cursor: pointer;
+
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.api-response summary:hover {
+  color: #2563eb;
+}
+
+.api-response pre {
+  margin-top: 12px;
+
+  padding: 14px;
+
+  max-height: 180px;
+
+  overflow: auto;
+
+  background: #111827;
+
+  border-radius: 9px;
+
+  color: #d1d5db;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 1100px) {
+  .prediction-page {
+    padding: 28px 24px 40px;
+  }
+
+  .prediction-container {
+    grid-template-columns: 1fr;
+  }
+
+  .prediction-result {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 650px) {
+  .prediction-page {
+    padding: 22px 15px 35px;
+  }
+
+  .prediction-header h1 {
+    font-size: 30px;
+  }
+
+  .prediction-header p {
+    font-size: 13px;
+  }
+
+  .prediction-form {
+    grid-template-columns: 1fr;
+
+    padding: 20px;
+  }
+
+  .prediction-form::before {
+    grid-column: 1;
+  }
+
+  .predict-button {
+    grid-column: 1;
+  }
+
+  .prediction-result {
+    padding: 20px;
+  }
+}

@@ -1,20 +1,13 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://127.0.0.1:8000",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export const predictDelay = async (data) => {
-  const response = await API.post("/predict", data);
-  return response.data;
-};
+const API_URL = "http://127.0.0.1:8000";
 
 export const getDashboardData = async () => {
-  const response = await API.get("/dashboard");
+  const response = await axios.get(`${API_URL}/dashboard`);
   return response.data;
 };
 
-export default API;
+export const predictDelivery = async (data) => {
+  const response = await axios.post(`${API_URL}/predict`, data);
+  return response.data;
+};

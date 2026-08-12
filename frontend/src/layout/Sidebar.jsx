@@ -1,38 +1,56 @@
-import { Link } from "react-router-dom";
-import {
-  FaHome,
-  FaTruck,
-  FaRobot,
-  FaLightbulb,
-} from "react-icons/fa";
-
 import "../styles/sidebar.css";
-function Sidebar(){
 
-    return(
+function Sidebar({ page, onPageChange }) {
+  const menuItems = [
+    {
+      id: "dashboard",
+      icon: "⌂",
+      label: "Dashboard",
+    },
+    {
+      id: "shipments",
+      icon: "🚚",
+      label: "Shipments",
+    },
+    {
+      id: "prediction",
+      icon: "🤖",
+      label: "Prediction",
+    },
+    {
+      id: "recommendation",
+      icon: "💡",
+      label: "Recommendation",
+    },
+  ];
 
-        <aside className="sidebar">
+  return (
+    <aside className="sidebar">
 
-            <Link to="/">
-                <FaHome/> Dashboard
-            </Link>
+      <div className="sidebar-menu">
 
-            <Link to="/shipments">
-                <FaTruck/> Shipments
-            </Link>
+        {menuItems.map((item) => (
+          <button
+            key={item.id}
+            className={`sidebar-item ${
+              page === item.id ? "active" : ""
+            }`}
+            onClick={() => onPageChange(item.id)}
+          >
+            <span className="sidebar-icon">
+              {item.icon}
+            </span>
 
-            <Link to="/prediction">
-                <FaRobot/> Prediction
-            </Link>
+            <span className="sidebar-label">
+              {item.label}
+            </span>
+          </button>
+        ))}
 
-            <Link to="/recommendation">
-                <FaLightbulb/> Recommendation
-            </Link>
+      </div>
 
-        </aside>
-
-    )
-
+    </aside>
+  );
 }
 
 export default Sidebar;
